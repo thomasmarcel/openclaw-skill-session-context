@@ -14,15 +14,15 @@ Automatically loads recent conversation memory into new sessions and generates A
 ### Via ClawHub (recommended)
 
 ```bash
-clawhub install self-improving-agent
+clawhub install session-context
 ```
 
 ### Manual
 
 ```bash
 cd ~/.openclaw/workspace/skills
-git clone <your-repo> self-improving-agent
-openclaw skills enable self-improving-agent
+git clone <your-repo> session-context
+openclaw skills enable session-context
 ```
 
 ## How It Works

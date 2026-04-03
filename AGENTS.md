@@ -9,13 +9,10 @@ session-context/
 ├── SKILL.md                    # Main skill documentation
 ├── _meta.json                  # Skill metadata (slug, hooks, version)
 ├── hooks/
-│   ├── session/
-│   │   ├── start/handler.js     # Loads memory into new sessions
-│   │   └── compact:before/     # Generates summaries before compaction
-│   └── openclaw/handler.ts      # Injects self-improvement reminder
+│   └── session/
+│       ├── start/handler.js     # Loads memory into new sessions
+│       └── compact:before/     # Generates summaries before compaction
 ├── memory/                     # Auto-created; stores daily summaries
-├── scripts/                    # Utility scripts
-├── references/                 # Detailed documentation
 └── assets/                     # Templates and resources
 ```
 
@@ -43,23 +40,20 @@ This is a hook-based skill with no build system. Handlers are plain JavaScript/T
 - Use `log.debug()` for flow tracing, `log.info()` for significant events
 - Handle errors gracefully - hooks should not crash the session
 
-### JavaScript Handlers (Preferred)
+### JavaScript Handlers
 
 ```javascript
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 export default async function (context) {
-  // Destructure with fallbacks
   const { workspace = process.cwd(), log = console } = context;
   
-  // Guard clauses with early returns
   if (!shouldProceed(context)) {
     return;
   }
   
   try {
-    // Async operations with proper error handling
     const result = await doSomething(context);
     log.info('Operation completed', { result });
   } catch (error) {
@@ -67,12 +61,6 @@ export default async function (context) {
   }
 }
 ```
-
-### TypeScript Handlers (For OpenClaw Integration)
-
-- Import types: `import type { HookHandler } from 'openclaw/hooks';`
-- Use strict typing for event handlers
-- Export typed handler: `const handler: HookHandler = async (event) => { ... }`
 
 ### Naming Conventions
 
@@ -127,8 +115,6 @@ const maxTokens = context.config?.maxTokens || 128000;
 
 ### Hook Handler Patterns
 
-#### Session Hooks (JavaScript)
-
 ```javascript
 export default async function (context) {
   const log = context.log || console;
@@ -138,24 +124,6 @@ export default async function (context) {
   
   // ... implementation
 }
-```
-
-#### OpenClaw Integration Hooks (TypeScript)
-
-```typescript
-import type { HookHandler } from 'openclaw/hooks';
-
-const handler: HookHandler = async (event) => {
-  if (event.type !== 'agent' || event.action !== 'bootstrap') {
-    return;
-  }
-  
-  if (Array.isArray(event.context.bootstrapFiles)) {
-    event.context.bootstrapFiles.push({ ... });
-  }
-};
-
-export default handler;
 ```
 
 ### File Operations
@@ -192,7 +160,6 @@ const threshold = context.config?.threshold || 0.6;
 |------|---------|---------|
 | `session:start` | Load memory into new sessions | `hooks/session/start/handler.js` |
 | `session:compact:before` | Generate summary before compaction | `hooks/session/compact:before/handler.js` |
-| `agent:bootstrap` | Inject self-improvement reminder | `hooks/openclaw/handler.ts` |
 
 ### Hook Context Properties
 

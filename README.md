@@ -21,7 +21,7 @@ clawhub install session-context
 
 ```bash
 cd ~/.openclaw/workspace/skills
-git clone <your-repo> session-context
+git clone https://github.com/thomasmarcel/openclaw-skill-session-context.git session-context
 openclaw skills enable session-context
 ```
 

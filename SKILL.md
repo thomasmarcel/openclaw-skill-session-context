@@ -1,6 +1,6 @@
 ---
 name: Session Memory & Summarization
-slug: session-memory
+slug: session-context
 description: "Automatically loads recent conversation memory into new sessions and generates AI summaries during compaction to maintain continuity across conversations."
 author: "AniBot (Thomas)"
 version: "1.0.0"
@@ -15,7 +15,7 @@ hooks:
   - "session:start"
   - "session:compact:before"
 repository: "https://github.com/animo66/openclaw-skills"
-homepage: "https://clawhub.ai/skills/session-memory"
+homepage: "https://clawhub.ai/skills/session-context"
 minOpenClawVersion: "0.29.0"
 ---
 
@@ -42,15 +42,15 @@ Runs before automatic compaction when token usage exceeds thresholds. If conditi
 ## Installation
 
 ```bash
-clawhub install session-memory
+clawhub install session-context
 ```
 
 Or manually:
 
 ```bash
 cd ~/.openclaw/workspace/skills
-git clone <your-repo> session-memory
-openclaw skills enable session-memory
+git clone https://github.com/thomasmarcel/openclaw-skill-session-context.git session-context
+openclaw skills enable session-context
 ```
 
 ## Requirements

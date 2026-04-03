@@ -1,0 +1,22 @@
+{
+  "name": "Session Memory & Summarization",
+  "slug": "session-memory",
+  "description": "Automatically loads recent conversation memory into new sessions and generates AI summaries during compaction to maintain continuity across conversations.",
+  "author": "AniBot (Thomas)",
+  "version": "1.0.0",
+  "license": "MIT",
+  "tags": [
+    "memory",
+    "session",
+    "summarization",
+    "continuity",
+    "ai"
+  ],
+  "hooks": [
+    "session:start",
+    "session:compact:before"
+  ],
+  "repository": "https://github.com/animo66/openclaw-skills",
+  "homepage": "https://clawhub.ai/skills/session-memory",
+  "minOpenClawVersion": "0.29.0"
+}
